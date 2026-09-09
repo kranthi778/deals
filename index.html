@@ -2,77 +2,1180 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartDealsHub | Deals & Socials</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SmartDealsHub — Exclusive Verified Deals</title>
+  <meta name="description" content="Enter your Instagram Product Code (SDH-XXXX) to instantly find your verified Amazon deal, discount, and direct link.">
+  <meta property="og:title" content="SmartDealsHub — Exclusive Verified Deals">
+  <meta property="og:description" content="Instant Product Code Lookup for exclusive verified Amazon deals.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
   <style>
+    :root {
+      --bg-primary: #070a13;
+      --bg-secondary: #0d1527;
+      --bg-card: rgba(17, 24, 39, 0.85);
+      --bg-card-hover: rgba(23, 33, 54, 0.95);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-focus: #3b82f6;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-cyan: #06b6d4;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --amazon-orange: #ff9900;
+      --amazon-orange-hover: #e68a00;
+      --glow-cyan: rgba(6, 182, 212, 0.25);
+      --glow-orange: rgba(255, 153, 0, 0.35);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #0d1117;
-      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #15213b 0%, var(--bg-primary) 55%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 30px 16px;
-      margin: 0;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
-    .profile-title { font-size: 22px; font-weight: bold; margin-bottom: 4px; }
-    .profile-bio { font-size: 14px; color: #8b949e; margin-bottom: 24px; text-align: center; }
-    
-    .section-label {
-      width: 100%;
-      max-width: 400px;
-      font-size: 13px;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      background: rgba(7, 10, 19, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 20px;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #000;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 3px 7px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+      -webkit-text-fill-color: #000;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #8b949e;
-      margin: 12px 0 8px 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .social-btn.telegram:hover {
+      border-color: #229ed9;
+      color: #229ed9;
+      box-shadow: 0 0 12px rgba(34, 158, 217, 0.3);
+    }
+
+    .social-btn.pinterest:hover {
+      border-color: #e60023;
+      color: #e60023;
+      box-shadow: 0 0 12px rgba(230, 0, 35, 0.3);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    /* Hero & Search */
+    .hero {
+      text-align: center;
+      margin: 20px 0 28px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* Search Input Box */
+    .search-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.35);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 4px 6px 4px 14px;
+      transition: all 0.2s ease;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px var(--glow-cyan);
+    }
+
+    .search-icon {
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 4px;
+      width: 100%;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .btn-clear {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: var(--text-secondary);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .btn-clear:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--text-primary);
+    }
+
+    .btn-search {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #000;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-search:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 16px var(--glow-cyan);
+    }
+
+    /* Chips */
+    .search-chips {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .chip-label {
+      color: var(--text-muted);
       font-weight: 600;
     }
 
-    .link-btn {
-      width: 100%;
-      max-width: 400px;
-      background: #161b22;
-      border: 1px solid #30363d;
-      color: #ffffff;
-      text-decoration: none;
-      padding: 14px 18px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      font-weight: 600;
-      text-align: center;
-      box-sizing: border-box;
-      display: block;
-      transition: all 0.2s ease;
+    .code-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s;
     }
-    .link-btn:hover { background: #21262d; border-color: #58a6ff; }
-    
-    .telegram-btn { background: #0088cc; border: none; }
-    .telegram-btn:hover { background: #0077b5; }
-    
-    .pinterest-btn { background: #e60023; border: none; }
-    .pinterest-btn:hover { background: #cc001f; }
+
+    .code-chip:hover {
+      background: rgba(6, 182, 212, 0.15);
+      border-color: var(--accent-cyan);
+      transform: translateY(-1px);
+    }
+
+    /* Result Card (Single Code Match) */
+    #resultContainer {
+      margin-bottom: 32px;
+    }
+
+    .deal-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 25px var(--glow-cyan);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .deal-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .code-badge-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 999px;
+      color: var(--accent-cyan);
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+
+    .code-badge-large:hover {
+      background: rgba(6, 182, 212, 0.25);
+    }
+
+    .discount-pill {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    }
+
+    .deal-card-body {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .deal-card-body {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    .product-img-wrapper {
+      width: 100%;
+      height: 200px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 12px;
+      position: relative;
+    }
+
+    .product-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .deal-card:hover .product-img {
+      transform: scale(1.05);
+    }
+
+    .product-details {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .product-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text-primary);
+    }
+
+    .price-block {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      .price-block {
+        justify-content: center;
+      }
+    }
+
+    .current-price {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--accent-green);
+    }
+
+    .original-price {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .savings-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-amber);
+      background: rgba(245, 158, 11, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .value-props {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 640px) {
+      .value-props {
+        justify-content: center;
+      }
+    }
+
+    .prop-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Amazon Direct Button */
+    .btn-amazon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--amazon-orange), var(--amazon-orange-hover));
+      color: #111827;
+      font-weight: 900;
+      font-size: 1.1rem;
+      padding: 16px 28px;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px var(--glow-orange);
+      transition: all 0.25s ease;
+      margin-top: 14px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-amazon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+      animation: sweep 3s infinite;
+    }
+
+    @keyframes sweep {
+      0% { left: -100%; }
+      50%, 100% { left: 100%; }
+    }
+
+    .btn-amazon:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px var(--glow-orange);
+      color: #000;
+    }
+
+    /* Error Message Box */
+    .not-found-box {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .not-found-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    .not-found-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fca5a5;
+      margin-bottom: 6px;
+    }
+
+    .not-found-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* Catalog Section (Browse All) */
+    .catalog-section {
+      margin-top: 40px;
+    }
+
+    .catalog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .catalog-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .catalog-count {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .grid-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .grid-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(6, 182, 212, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.5);
+    }
+
+    .grid-img-wrapper {
+      width: 100%;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 8px;
+    }
+
+    .grid-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .grid-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+    }
+
+    .grid-code {
+      font-weight: 800;
+      color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .grid-discount {
+      font-weight: 800;
+      color: #ef4444;
+    }
+
+    .grid-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .grid-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .grid-price {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--accent-green);
+    }
+
+    .grid-orig-price {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .grid-btn {
+      background: rgba(255, 153, 0, 0.15);
+      border: 1px solid rgba(255, 153, 0, 0.4);
+      color: var(--amazon-orange);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .grid-card:hover .grid-btn {
+      background: var(--amazon-orange);
+      color: #000;
+      border-color: var(--amazon-orange);
+    }
+
+    /* Amazon Associate Disclaimer */
+    .disclosure-banner {
+      margin-top: 36px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      background: rgba(7, 10, 19, 0.9);
+      padding: 24px 20px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(17, 24, 39, 0.95);
+      border: 1px solid var(--accent-cyan);
+      color: var(--text-primary);
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 <body>
 
-  <div class="profile-title">🔥 SmartDealsHub</div>
-  <div class="profile-bio">Shop Smarter • Save Bigger</div>
+  <!-- Navigation Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo" onclick="resetSearch(event)">
+        <span>⚡ SmartDealsHub</span>
+        <span class="logo-badge">Verified</span>
+      </a>
+      <div class="nav-links">
+        <a href="https://t.me/smartdealshub" target="_blank" rel="noopener noreferrer" class="social-btn telegram" title="Join Telegram Channel">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+          <span>Telegram</span>
+        </a>
+        <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" class="social-btn pinterest" title="Follow on Pinterest">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.332 1.365-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+          <span>Pinterest</span>
+        </a>
+      </div>
+    </div>
+  </header>
 
-  <!-- Official Channels -->
-  <div class="section-label">Official Channels</div>
-  <a href="https://t.me/smartdealshub108" class="link-btn telegram-btn" target="_blank" rel="noopener noreferrer">
-    📢 Join VIP Telegram (Instant Loot Deals)
-  </a>
-  <a href="https://pinterest.com/" class="link-btn pinterest-btn" target="_blank" rel="noopener noreferrer">
-    📌 Follow on Pinterest
-  </a>
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-pill">⚡ Direct Deal Finder</div>
+      <h1>Got a Code from Instagram?</h1>
+      <p>Enter the <strong>Product Code</strong> from our post or comment (e.g. <code>SDH-0001</code>) to instantly reveal the exact product and claim the discount.</p>
+    </section>
 
-  <!-- Featured Affiliate Deals -->
-  <div class="section-label">Featured Deals</div>
-  <a href="https://link.amazon/B063h40rM" class="link-btn" target="_blank" rel="noopener noreferrer">
-    🛒 #1: Fast Charging Power Bank - 60% Off
-  </a>
+    <!-- Search Section -->
+    <section class="search-section">
+      <div class="search-box">
+        <span class="search-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
+        <input 
+          id="codeInput" 
+          class="search-input" 
+          type="text" 
+          placeholder="ENTER PRODUCT CODE (e.g. SDH-0001)" 
+          autocomplete="off" 
+          spellcheck="false" 
+          autocapitalize="characters"
+        />
+        <button id="clearBtn" class="btn-clear" onclick="clearInput()" title="Clear">✕</button>
+        <button id="searchBtn" class="btn-search" onclick="handleSearch()">
+          <span>Find Deal</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
 
+      <div class="search-chips">
+        <span class="chip-label">Try popular:</span>
+        <span class="code-chip" onclick="quickSearch('SDH-0001')">SDH-0001</span>
+        <span class="code-chip" onclick="quickSearch('SDH-0002')">SDH-0002</span>
+        <span class="code-chip" onclick="quickSearch('SDH-0003')">SDH-0003</span>
+        <span class="code-chip" onclick="quickSearch('SDH-0029')">SDH-0029</span>
+      </div>
+    </section>
+
+    <!-- Result Container (Code Match or Error) -->
+    <div id="resultContainer"></div>
+
+    <!-- Catalog Section (All Active Deals) -->
+    <section class="catalog-section">
+      <div class="catalog-header">
+        <h2 class="catalog-title">
+          <span>All Active Deals</span>
+          <span id="catalogCount" class="catalog-count">29 Deals</span>
+        </h2>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Click any deal or enter its code above</span>
+      </div>
+      <div id="catalogGrid" class="catalog-grid">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Amazon Associates Compliance Disclosure -->
+    <div class="disclosure-banner">
+      <strong>Amazon Associate Disclosure:</strong> SmartDealsHub is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.in / Amazon.com. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of this product.
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="https://t.me/smartdealshub" target="_blank" rel="noopener noreferrer">Telegram Channel</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer">Pinterest</a>
+    </div>
+    <p>© 2026 SmartDealsHub. Built with precision for Amazon deal shoppers.</p>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <span>✓</span>
+    <span id="toastMsg">Copied!</span>
+  </div>
+
+  <!-- Fallback Embedded Data (ensures 100% offline & local file reliability) -->
+  <script id="embedded-deals" type="application/json">
+[{"product_code": "SDH-0001", "product_name": "Dyazo Overhead Long Arm LED Desk Lamp | 360° Adjustable Swing Arm Clamp | 3 Color Modes & 10 Brightness Levels | Eye Caring 12W Table Light (Black)", "price": 1099.0, "original_price": 2499.0, "discount_percent": 56.02, "product_image_url": "", "product_details": "", "affiliate_url": "https://link.amazon/B08f52BDk", "asin": ""}, {"product_code": "SDH-0002", "product_name": "Deals On Trimmers", "price": 3410.0, "original_price": 4595.0, "discount_percent": 60.0, "product_image_url": "https://images-na.ssl-images-amazon.com/images/P/B0BCQTRZ77.01._SX500_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B03N3Hgto", "asin": "B0BCQTRZ77"}, {"product_code": "SDH-0003", "product_name": "Noise Pulse 2 Max 1.85inch Bluetooth Calling Smartwatch", "price": 1133.0, "original_price": 5999.0, "discount_percent": 80.0, "product_image_url": "https://images-na.ssl-images-amazon.com/images/P/B0B6BLTGTT.01._SX500_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B020nK2y0?tag=smartdealshub-21&linkCode=ogi", "asin": "B0B6BLTGTT"}, {"product_code": "SDH-0004", "product_name": "Redmi 108 cm (43 inches) 4K Ultra HD Android Smart LED TV", "price": 2299.0, "original_price": 6999.0, "discount_percent": 67.0, "product_image_url": "https://images-na.ssl-images-amazon.com/images/P/B097R25DP7.01._SX500_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0icSGwKg?tag=smartdealshub-21&linkCode=ogi", "asin": "B097R25DP7"}, {"product_code": "SDH-0005", "product_name": "Lakme 9to5 Hya Mte, Beach Edit Cushion Foundion, N 260-N...", "price": 352.0, "original_price": 999.0, "discount_percent": 65.0, "product_image_url": "https://cdn4.telesco.pe/file/gxCIMpVEQAsr38jrTF9DzHAyhp7j2ZJC3baosJoJXbJoVn9I0imgI3o2cyl7SeIGfjMitmzAQ9XtpVsAmnDmnFFRL2PRBKOFSSh-YdvGwrDLU0B-agCSyQ17Xfwd9U7oMMItSA9aqZ2E1cRgay5siHmOWgLF9zfzqEZxmw1XbiWXzh2l0NY2RsncDuo8YDNDnsMpIz0qx0qqtmBeP50PB1FAN6AKs1v4s3x06G61cYt5XUlzcSJVYM38F6abQBe3_drDTcMAVayDFTHpF7_aw-KEmr1En0i_7DKcBDGn5vM9sb3rt7mH_ZHRLopTctkAJ9MMxQldqlGKWuCRmnS2FQ.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B05WOxETi?tag=smartdealshub-21&linkCode=ogi", "asin": "B0GGBQMT9K"}, {"product_code": "SDH-0006", "product_name": "Aristocr Polyester 53 cms Red Travel Duffle (Rookie)", "price": 958.0, "original_price": 2950.0, "discount_percent": 68.0, "product_image_url": "https://cdn4.telesco.pe/file/gtNTfMQ8AiBjoH8_QeD7ccdHQRztJc26S2H4R9LtzzKeNX6K8ZMLLmUu8WjbD_LP9Gizzv0TAQNTPbgJ8JsOKzhwJT-jZ-pGVL-eBasynAWPIT4TNGbGkc4I7kTk2t-OMURAn86Hc5GAItSQ7t5xzMFWawQER4XrebHMdY5TAnkZ61IqCHGJOHzF8yn0g6rbOKbas7tiAYXSDtr91Bi3WDeMrcMPS1cuLYGh5nvP90AiDna8ePvoi7gdrQI7z-TDVyOejmg5NWgdKvVd5Z-4TyH8zBcR8j2se5Q-fwX6zAr2pilEYa4nr8Ac4dwyaAxxL5uZfyII7OTO3tpJiFJIQw.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0fQQOA8p?tag=smartdealshub-21&linkCode=ogi", "asin": "B07YZH772P"}, {"product_code": "SDH-0007", "product_name": "Lakme 9 to 5 CC Cream Beige with 3% Niacinamide Complex SPF3...", "price": 204.0, "original_price": 435.0, "discount_percent": 53.0, "product_image_url": "https://cdn4.telesco.pe/file/S9Xaa8QC0tL6dWEo5zhNi0n1l3BOe7oOwbr0WdFq_Nks59_sGMSwtL0xxQCIqB6WBCYOw973tYFZp5jEhDWHGfqegkfARKA-eZXJygxT3U08jDn-TJB-dzmBACc7mVc-eH2AL20JIHeDEsQdViEIwLmYwTRwIzgxbd8mpmR3_8tQ8TsIXHo9LNgw7nmLXzep7TfXLssjm1Qa0nzbavBs3wwcJnmcl2rEpSRHA0FYmVA9etEl2KZfqcl-ynEDUcixG1WuqCae_alU9pHu9bBl2kxMHQrnM6TeAf1IM7_mAzRr3e8iTpvnABj9tiRz4RWNXE-RKkWoBjwN5G-UemTPlQ.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0hy6bsxj", "asin": "B01BBNF6GM"}, {"product_code": "SDH-0008", "product_name": "Samsung Galaxy Buds Core (Black) Galaxy AI Enabled in-Ear TW...", "price": 4199.0, "original_price": 9999.0, "discount_percent": 58.0, "product_image_url": "https://cdn4.telesco.pe/file/mTUZlgTprGKYBhcLPJZo4yzZ4W90w9Y6d9SBtaJ1d72MiYj19mPuhRZ5DuDjAF1TboCj2DzvHH08DwlXMC5EIfYKmZ5GFsUsRwsdn7ZUdeQW5b7TzCxWKx7tSaK2biubqwL2n-S5L2U1C5NgARsTBqAg_TGmHK_LuXCcgeP3zoWn_jNPZE8hdkzF0MeUrMTQCb1Rse0RhYlPitKBK1bxHgMhLr2lhx4tAutEuZcnYjEANT1SHtytRaQAcPrWjY8lYLzSSjkrpYlNn4xgLz0azLs7g_ojXqvLnzvSxYkseGtF1zzKry_KNBiTYTUrztHNaB_BXTgOuKr6P64FuBi0nQ.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B09fsaK0p", "asin": "B0FDGVNSLH"}, {"product_code": "SDH-0009", "product_name": "Alvami Women's Silk Solid Regular Kurta Set", "price": 859.0, "original_price": 6999.0, "discount_percent": 88.0, "product_image_url": "https://cdn4.telesco.pe/file/HJd14ij-_P4ftPDc5u7S_kgH8269PC1RJUmP7b6Jjbrp4Gui5Yy1GtqrMwFxzYQ6ENw0I3eB5gyzLVuzTpbRHS76ryRugiPxUECHtrpCja2QKZY3C9nZOXdDZL35zYpwtFS_b-sBGYP_Nby5ZWFVLIp-zNKGFErWu0wkzqo1s8t_JzxwpedEVZ37RnbD9hQgd21bhKd8Hhzqe2CdMFwBP8mzSRdDjuOF2SRPWySF-Fp2DxvgZxe3-4C_VArM1VgAu457noL008A6kWnzujyKz1ZiQV2oWY6fCcD9s8TD4G4n8bTH1ZqcjBE4upJdjm_tE_CfgApPIa1kw_twX-3s1g.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B04wg1eyB", "asin": "B0FDGYJH3K"}, {"product_code": "SDH-0010", "product_name": "WROGN Men's Anti-slip Sliders | Lightweight EVA Sole | Cushi...", "price": 719.0, "original_price": 1799.0, "discount_percent": 60.0, "product_image_url": "https://cdn4.telesco.pe/file/oImVX34emCQEFmk69OUsDw3Dt9185A2oWBdcbKURiqRWsmN0cTSC1X0a4RiBH8beI8_hLzqUfyFdv_FtEpkA28yicyi4rZoaIkL_H4HrE2BWWevwfQNM9SGBa3xYGU8NW3fEE-jYutasgRpGTyWS67Zgx3wFLkniR_HVw-T_QPsMNS3Xne2CtGcrKOQDnzuCweOloevMlG_2E6tCVIM6nyLjIdxXHc4oGEyvv3n4VTVYqLQiqqcUcxHt7cNsYfrSr3rjX8pX3l_7cb-gRiElgzi2ZPcCa5JeFQFghWwHFmsktSUkz8nwjB3yq2tlnecawaTOd6b0bZcoB0edqBPRFQ.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0hmWWfb0", "asin": "B0GV4P411M"}, {"product_code": "SDH-0011", "product_name": "Havells Ambrose 1200mm Decorative Ceiling Fan", "price": 2349.0, "original_price": 3675.0, "discount_percent": 36.0, "product_image_url": "https://images-na.ssl-images-amazon.com/images/P/B0BSWKRMN7.01._SX500_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B01XDSpEx", "asin": "B0BSWKRMN7"}, {"product_code": "SDH-0012", "product_name": "🪒", "price": 849.0, "original_price": 1075.0, "discount_percent": 21.0, "product_image_url": "https://images-na.ssl-images-amazon.com/images/P/B0BXNVPRGS.01._SX500_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B08VT88Tw", "asin": "B0BXNVPRGS"}, {"product_code": "SDH-0013", "product_name": "Nature Prime 100% Natural Premium Mix Dry Fruits 500Gm with Almonds | Cashew | Kishmish | Apricot | Black Raisins | Dried Kiwi | Nuts and Dr", "price": 329.0, "original_price": 799.0, "discount_percent": 59.0, "product_image_url": "https://m.media-amazon.com/images/I/41I9WoMIs3L._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0cmgn3rd", "asin": "B0BN1V3MYY"}, {"product_code": "SDH-0014", "product_name": "SWAGR 12 Pairs Sports Cotton Ankle Length Socks for Men, Pack of 12., Assorted", "price": 198.0, "original_price": 198.0, "discount_percent": 85.0, "product_image_url": "https://m.media-amazon.com/images/I/81ftVn2v5gL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0cO7teVH", "asin": "B0DGX12XXV"}, {"product_code": "SDH-0015", "product_name": "Amazon Verified Deal B0H8XQ49B8", "price": 999.0, "original_price": 54999.0, "discount_percent": 41.0, "product_image_url": "https://images-na.ssl-images-amazon.com/images/P/B0H8XQ49B8.01._SX500_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0bw3g0E2", "asin": "B0H8XQ49B8"}, {"product_code": "SDH-0016", "product_name": "Vaseline Cocoa Glow Serum In Lotion, 400 ml | 100% Pure Cocoa & Shea Butter for Glowing & Soft Skin", "price": 271.0, "original_price": 271.0, "discount_percent": 0.0, "product_image_url": "https://m.media-amazon.com/images/I/51r7G9tLfLL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B041Aemeh", "asin": "B07W44MH3W"}, {"product_code": "SDH-0017", "product_name": "Odonil Air Freshener Room Spray - 440 ml Combo (Pack of 2, 220ml each) | Jasmine Fresh & Ocean Breeze | Nature Inspired Fragrance for Home &", "price": 199.0, "original_price": 199.0, "discount_percent": 33.0, "product_image_url": "https://m.media-amazon.com/images/I/71hbrL1vOUL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B03VUGqRH", "asin": "B0B3XQ8GVQ"}, {"product_code": "SDH-0018", "product_name": "M MEDLER Epoch Nylon 55 litres Waterproof Strolley Duffle Bag- 2 Wheels - Luggage Bag - (Navy Blue)", "price": 398.0, "original_price": 2999.0, "discount_percent": 87.0, "product_image_url": "https://m.media-amazon.com/images/I/71tzEgzCFcL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0gSdBg3s", "asin": "B07MWD4D4W"}, {"product_code": "SDH-0019", "product_name": "Milton Rapid Electric Kettle 1.8L | 1500 Watts | Stainless Steel Hot Water portable Electric Kettle for Home, Office | Auto Shut-Off with Wi", "price": 649.0, "original_price": 1499.0, "discount_percent": 57.0, "product_image_url": "https://m.media-amazon.com/images/I/51lYFOP2mUL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0h7Vuxc9", "asin": "B0F54GKQ38"}, {"product_code": "SDH-0020", "product_name": "ZORO Men's Vegan Leather Belt for Men, Formal/Casual,Autolock,Black | Fit on up to 38 Inches Waist size", "price": 169.0, "original_price": 349.0, "discount_percent": 51.6, "product_image_url": "https://m.media-amazon.com/images/I/71hEGHI6AnL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B029HjYOz", "asin": "B0854J6N67"}, {"product_code": "SDH-0021", "product_name": "Comfort Morning Fresh Fabric Conditioner 2 L Refill Pack|| After Wash Liquid Fabric Softener - For Softness|| Shine & Long Lasting Freshness", "price": 377.0, "original_price": 450.0, "discount_percent": 16.0, "product_image_url": "https://m.media-amazon.com/images/I/81hjfHDwDXL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B04AwChhA", "asin": "B07F8H9NYY"}, {"product_code": "SDH-0022", "product_name": "SJeware Men and Women Solid Ankle Length Socks Multicolored (SJW-PLAIN-PACKOF12-B)", "price": 195.0, "original_price": 195.0, "discount_percent": 0.0, "product_image_url": "https://m.media-amazon.com/images/I/81TRdxk1wnL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B00ALGxkq", "asin": "B0BZVZYXV5"}, {"product_code": "SDH-0023", "product_name": "Ezee Live Life Ezee Way Black Garbage Bags for Dustbin|90 Pcs|Medium 19 X 21 Inches|30 Pcs X Pack of 3, 3 count", "price": 175.0, "original_price": 216.0, "discount_percent": 17.0, "product_image_url": "https://m.media-amazon.com/images/I/71erHCKJ3WL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B08wUouoE", "asin": "B06VX8YR6Q"}, {"product_code": "SDH-0024", "product_name": "SOFLIN Egg Boiler Electric Automatic Off 7 Egg Poacher For Steaming, Cooking, Boiling And Frying, (350 Watts,Multicolor)", "price": 298.0, "original_price": 999.0, "discount_percent": 70.2, "product_image_url": "https://m.media-amazon.com/images/I/41zR1WhC8eL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B06e8kgkl", "asin": "B07GMFY9QM"}, {"product_code": "SDH-0025", "product_name": "VOLTURI Non Scratch Wire Dish Cloth (Pack of 10), Steel Scrubber for Utensils Cleaning, Multipurpose Wet and Dry Cleaning, Stainless-Steel D", "price": 199.0, "original_price": 999.0, "discount_percent": 80.1, "product_image_url": "https://m.media-amazon.com/images/I/81VVv+eRQCL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B024seSF8", "asin": "B0D3LXD8JM"}, {"product_code": "SDH-0026", "product_name": "Exo Dishwash Bar, 360gm (90gm X (3 + 1 Bar Free) | Complete Dishwashing Solution With Anti-Bacterial Efficacy & Goodness of Ginger Remove To", "price": 29.0, "original_price": 30.0, "discount_percent": 3.0, "product_image_url": "https://m.media-amazon.com/images/I/61RWp65UqtL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0cwPigTm", "asin": "B078HC9V8B"}, {"product_code": "SDH-0027", "product_name": "Parachute Coconut Oil, 1 L (Pet Jar)", "price": 455.0, "original_price": 575.0, "discount_percent": 21.0, "product_image_url": "https://m.media-amazon.com/images/I/61nBoAnPSEL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B0d2CwfEN", "asin": "B003NQESIS"}, {"product_code": "SDH-0028", "product_name": "Kraft Seeds Stainless Steel Plant Cutter, Multipurpose Garden Scissors, Kitchen Scissor and Household Use, Durable Garden Tool, Plant Cuttin", "price": 159.0, "original_price": 299.0, "discount_percent": 46.8, "product_image_url": "https://m.media-amazon.com/images/I/61Wd6D6kfpL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B09kD7g2b", "asin": "B0151NOJHK"}, {"product_code": "SDH-0029", "product_name": "Symbol Premium Women's Stretch Formal Pencil Skirt | Knee-Length with Side Pockets (Available in Plus Sizes)", "price": 999.0, "original_price": 2199.0, "discount_percent": 54.6, "product_image_url": "https://m.media-amazon.com/images/I/61Z7Xn5EFTL._AC_UL320_.jpg", "product_details": "", "affiliate_url": "https://link.amazon/B04lPWuEU", "asin": "B0H1MMXXDK"}]
+  </script>
+
+  <!-- Application Logic -->
+  <script>
+    let DEALS = [];
+    const codeInput = document.getElementById('codeInput');
+    const clearBtn = document.getElementById('clearBtn');
+    const resultContainer = document.getElementById('resultContainer');
+    const catalogGrid = document.getElementById('catalogGrid');
+    const catalogCount = document.getElementById('catalogCount');
+
+    // SVG Placeholder when image is missing or broken
+    const PLACEHOLDER_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23111827'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='48' fill='%23374151'%3E🛍️%3C/text%3E%3C/svg%3E";
+
+    // Initialize Deals Catalog
+    async function initCatalog() {
+      // 1. Load from embedded JSON first (guaranteed zero delay)
+      try {
+        const rawEmbedded = document.getElementById('embedded-deals').textContent.trim();
+        if (rawEmbedded) {
+          DEALS = JSON.parse(rawEmbedded);
+        }
+      } catch (err) {
+        console.warn('Failed to parse embedded deals:', err);
+      }
+
+      // 2. Attempt background fresh fetch from ./deals.json or /deals/api/catalog
+      try {
+        const endpoints = ['./deals.json', '/deals/api/catalog', '/deals/deals.json'];
+        for (const ep of endpoints) {
+          try {
+            const resp = await fetch(ep);
+            if (resp.ok) {
+              const freshData = await resp.json();
+              if (Array.isArray(freshData) && freshData.length > 0) {
+                DEALS = freshData;
+                break;
+              }
+            }
+          } catch (_) {}
+        }
+      } catch (e) {
+        console.info('Using embedded fallback catalog.');
+      }
+
+      // 3. Render Catalog Grid
+      renderCatalog(DEALS);
+
+      // 4. Check URL Params (?code=SDH-0001 or #SDH-0001)
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramCode = urlParams.get('code') || window.location.hash.replace('#', '');
+      if (paramCode) {
+        codeInput.value = paramCode.trim().toUpperCase();
+        clearBtn.style.display = 'flex';
+        handleSearch();
+      }
+    }
+
+    // Input handlers
+    codeInput.addEventListener('input', (e) => {
+      const val = e.target.value.toUpperCase();
+      e.target.value = val;
+      clearBtn.style.display = val ? 'flex' : 'none';
+
+      // Live search / filter if code format matches or is partial
+      if (val.trim()) {
+        const clean = val.trim();
+        const exactMatch = DEALS.find(d => (d.product_code || '').toUpperCase() === clean);
+        if (exactMatch) {
+          renderDealCard(exactMatch);
+        } else {
+          // Live filter catalog
+          const filtered = DEALS.filter(d => 
+            (d.product_code || '').toUpperCase().includes(clean) ||
+            (d.product_name || '').toLowerCase().includes(clean.toLowerCase())
+          );
+          renderCatalog(filtered);
+        }
+      } else {
+        resultContainer.innerHTML = '';
+        renderCatalog(DEALS);
+      }
+    });
+
+    codeInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSearch();
+      }
+    });
+
+    function clearInput() {
+      codeInput.value = '';
+      clearBtn.style.display = 'none';
+      resultContainer.innerHTML = '';
+      renderCatalog(DEALS);
+      codeInput.focus();
+      history.replaceState(null, '', window.location.pathname);
+    }
+
+    function quickSearch(code) {
+      codeInput.value = code.toUpperCase();
+      clearBtn.style.display = 'flex';
+      handleSearch();
+      window.scrollTo({ top: 160, behavior: 'smooth' });
+    }
+
+    function resetSearch(e) {
+      if (e) e.preventDefault();
+      clearInput();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Main Search Logic
+    function handleSearch() {
+      const raw = codeInput.value.trim().toUpperCase();
+      if (!raw) {
+        resultContainer.innerHTML = '';
+        renderCatalog(DEALS);
+        return;
+      }
+
+      // Track search beacon
+      trackEvent('search', raw);
+
+      // Exact match check
+      const matched = DEALS.find(d => (d.product_code || '').toUpperCase() === raw);
+
+      if (matched) {
+        renderDealCard(matched);
+        history.replaceState(null, '', '?code=' + encodeURIComponent(matched.product_code));
+        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        renderNotFound(raw);
+      }
+    }
+
+    // Render Matched Deal Card
+    function renderDealCard(deal) {
+      const price = deal.price ? '₹' + Number(deal.price).toLocaleString('en-IN') : 'Check on Amazon';
+      const origPrice = deal.original_price ? '₹' + Number(deal.original_price).toLocaleString('en-IN') : '';
+      const discount = deal.discount_percent ? Math.round(deal.discount_percent) + '% OFF' : 'DEAL';
+      const savings = (deal.original_price && deal.price && deal.original_price > deal.price)
+        ? 'Save ₹' + (deal.original_price - deal.price).toLocaleString('en-IN')
+        : '';
+      const imgUrl = deal.product_image_url || PLACEHOLDER_SVG;
+
+      resultContainer.innerHTML = `
+        <div class="deal-card">
+          <div class="deal-card-header">
+            <span class="code-badge-large" onclick="copyCode('${deal.product_code}')" title="Click to copy code">
+              <span>🔢 ${deal.product_code}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </span>
+            <span class="discount-pill">🔥 ${discount}</span>
+          </div>
+
+          <div class="deal-card-body">
+            <div class="product-img-wrapper">
+              <img 
+                src="${imgUrl}" 
+                alt="${escapeHtml(deal.product_name)}" 
+                class="product-img" 
+                onerror="this.src='${PLACEHOLDER_SVG}'" 
+                loading="eager"
+              />
+            </div>
+
+            <div class="product-details">
+              <h2 class="product-title">${escapeHtml(deal.product_name)}</h2>
+              
+              <div class="price-block">
+                <span class="current-price">${price}</span>
+                ${origPrice ? `<span class="original-price">${origPrice}</span>` : ''}
+                ${savings ? `<span class="savings-badge">${savings}</span>` : ''}
+              </div>
+
+              <div class="value-props">
+                <span class="prop-item">✓ Amazon Verified Deal</span>
+                <span class="prop-item">✓ Secure Checkout</span>
+                <span class="prop-item">✓ Free & Fast Delivery</span>
+              </div>
+
+              <a 
+                href="${deal.affiliate_url}" 
+                target="_blank" 
+                rel="noopener noreferrer sponsored" 
+                class="btn-amazon" 
+                onclick="trackEvent('click_deal', '${deal.product_code}')"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                <span>GET DEAL ON AMAZON</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render Not Found Error Box
+    function renderNotFound(searchedCode) {
+      resultContainer.innerHTML = `
+        <div class="not-found-box">
+          <div class="not-found-icon">❌</div>
+          <div class="not-found-title">Product Code Not Found: "${escapeHtml(searchedCode)}"</div>
+          <div class="not-found-desc">
+            We couldn't find an active deal matching that code.<br>
+            Please double-check the code from the Instagram post (format: <strong>SDH-XXXX</strong>) or browse all verified deals below.
+          </div>
+        </div>
+      `;
+    }
+
+    // Render Catalog Grid
+    function renderCatalog(items) {
+      catalogCount.textContent = `${items.length} ${items.length === 1 ? 'Deal' : 'Deals'}`;
+
+      if (items.length === 0) {
+        catalogGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
+            No deals found matching your search.
+          </div>
+        `;
+        return;
+      }
+
+      catalogGrid.innerHTML = items.map(deal => {
+        const price = deal.price ? '₹' + Number(deal.price).toLocaleString('en-IN') : 'View Deal';
+        const origPrice = deal.original_price ? '₹' + Number(deal.original_price).toLocaleString('en-IN') : '';
+        const discount = deal.discount_percent ? Math.round(deal.discount_percent) + '% OFF' : '';
+        const imgUrl = deal.product_image_url || PLACEHOLDER_SVG;
+
+        return `
+          <div class="grid-card" onclick="quickSearch('${deal.product_code}')">
+            <div class="grid-card-meta">
+              <span class="grid-code">${deal.product_code}</span>
+              ${discount ? `<span class="grid-discount">${discount}</span>` : ''}
+            </div>
+
+            <div class="grid-img-wrapper">
+              <img 
+                src="${imgUrl}" 
+                alt="${escapeHtml(deal.product_name)}" 
+                class="grid-img" 
+                onerror="this.src='${PLACEHOLDER_SVG}'" 
+                loading="lazy"
+              />
+            </div>
+
+            <h3 class="grid-title">${escapeHtml(deal.product_name)}</h3>
+
+            <div class="grid-price-row">
+              <span class="grid-price">${price}</span>
+              ${origPrice ? `<span class="grid-orig-price">${origPrice}</span>` : ''}
+            </div>
+
+            <div class="grid-btn">View Deal →</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Helper: Copy code to clipboard
+    function copyCode(code) {
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(`Copied ${code} to clipboard!`);
+      }).catch(() => {
+        showToast(`Code: ${code}`);
+      });
+    }
+
+    // Helper: Toast
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      const tm = document.getElementById('toastMsg');
+      tm.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // Helper: Analytics Event Tracker
+    function trackEvent(action, code) {
+      try {
+        if (navigator.sendBeacon) {
+          const data = new FormData();
+          data.append('action', action);
+          data.append('code', code);
+          data.append('timestamp', new Date().toISOString());
+          navigator.sendBeacon('/deals/api/track', data);
+        } else {
+          fetch('/deals/api/track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action, code, timestamp: new Date().toISOString() }),
+            keepalive: true,
+          }).catch(() => {});
+        }
+      } catch (_) {}
+    }
+
+    // Helper: Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text || '';
+      return div.innerHTML;
+    }
+
+    // Boot
+    document.addEventListener('DOMContentLoaded', initCatalog);
+  </script>
 </body>
 </html>
